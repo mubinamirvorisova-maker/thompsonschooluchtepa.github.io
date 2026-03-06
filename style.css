@@ -58,7 +58,7 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
 
 a { color: inherit; text-decoration: none; }
-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+img { display: block; }
 ul { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
@@ -714,7 +714,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .member-photo {
   position: relative;
   width: 100%;
-  height: 240px;        /* fixed height — every card identical */
+  height: 340px;        /* tall enough to show full portrait */
   overflow: hidden;
   background: var(--black-4);
   flex-shrink: 0;
@@ -724,8 +724,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .member-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* crop to fill, never stretch */
-  object-position: center top; /* favour face over feet */
+  object-fit: cover;         /* fill the box */
+  object-position: center top; /* anchor to top so face is always visible */
   display: block;
   transition: transform var(--transition);
 }
