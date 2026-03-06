@@ -681,6 +681,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   transition: var(--transition);
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 
 .member-card:hover {
@@ -700,14 +702,36 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .member-card:hover .card-glow { opacity: 1; }
 
-.member-card-inner { position: relative; z-index: 1; }
+.member-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
 /* Photo */
 .member-photo {
   position: relative;
-  aspect-ratio: 4/3;
+  width: 100%;
+  height: 240px;        /* fixed height — every card identical */
   overflow: hidden;
   background: var(--black-4);
+  flex-shrink: 0;
+}
+
+/* Real <img> inside .member-photo */
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* crop to fill, never stretch */
+  object-position: center top; /* favour face over feet */
+  display: block;
+  transition: transform var(--transition);
+}
+
+.member-card:hover .member-photo img {
+  transform: scale(1.05);   /* subtle zoom on hover */
 }
 
 .photo-placeholder {
@@ -718,11 +742,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: center;
   font-size: 4rem;
   background: linear-gradient(135deg, var(--black-4), var(--black-5));
-  /* 
-     TO ADD REAL PHOTOS:
-     Replace this div with:
-     <img src="photos/member-name.jpg" alt="Member Name" />
-  */
 }
 
 .member-position-tag {
@@ -742,6 +761,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* Info */
 .member-info {
   padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .member-name {
@@ -765,13 +787,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 0.82rem;
   color: var(--white-dim);
   line-height: 1.6;
-  margin-bottom: 18px;
+  margin-bottom: 0;
+  flex: 1;               /* bio fills space, pushes achievements down */
 }
 
 .member-achievements {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 18px;      /* consistent gap from bio */
 }
 
 .achievement-tag {
